@@ -29,7 +29,8 @@ public class TicTacToeGui extends JFrame {
                 turnLabel.getPreferredSize().height
         );
 
+        getContentPane().add(turnLabel);
+        
          getContentPane().add(barLabel);
-         getContentPane().add(turnLabel);
     }
 }

@@ -10,4 +10,8 @@ public class CommonConstraints {
 
 
     public  static final Dimension FRAME_SIZE=new Dimension(540,760);
+    public static final String X_LABEL="X";
+    public static final String O_LABEL="O";
+
+
 }

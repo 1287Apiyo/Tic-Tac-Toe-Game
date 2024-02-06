@@ -12,6 +12,8 @@ public class TicTacToeGui extends JFrame {
         setLocationRelativeTo(null);
         setLayout(null);
         getContentPane().setBackground(CommonConstraints.BACKGROUND_COLOR);
+        //init vars
+        board=new JButton[3][3];
         addGuiComponents();
     }
     private void addGuiComponents(){
@@ -57,7 +59,9 @@ for (int i =0;i< board.length;i++){
         button.setBackground(CommonConstraints.BACKGROUND_COLOR);
         button.setBorder(BorderFactory.createLineBorder(CommonConstraints.BOARD_COLOR));
 
-        //add buttons to to board
+        //add buttons to  board
+        board[i][j]=button;
+        boardPanel.add(board[i][j]);
 
     }
 }
@@ -65,5 +69,6 @@ for (int i =0;i< board.length;i++){
         getContentPane().add(turnLabel);
          getContentPane().add(barLabel);
          getContentPane().add(scoreLabel);
+         getContentPane().add(boardPanel);
     }
 }

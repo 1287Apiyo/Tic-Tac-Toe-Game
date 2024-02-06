@@ -66,9 +66,23 @@ for (int i =0;i< board.length;i++){
     }
 }
 
+
+       //reset button
+        JButton resetButton=new JButton("Reset");
+        resetButton.setFont(new Font("Dialog",Font.PLAIN,24));
+        resetButton.setBackground(CommonConstraints.BOARD_COLOR);
+        resetButton.setBounds(
+                (CommonConstraints.FRAME_SIZE.width - resetButton.getPreferredSize().width)/2,
+                CommonConstraints.FRAME_SIZE.height-  100,
+                resetButton.getPreferredSize().width,
+                resetButton.getPreferredSize().height
+
+        );
+
         getContentPane().add(turnLabel);
          getContentPane().add(barLabel);
          getContentPane().add(scoreLabel);
          getContentPane().add(boardPanel);
+         getContentPane().add(resetButton);
     }
 }

@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class TicTacToeGui extends JFrame {
     private JLabel turnLabel,scoreLabel;
+    private  JButton[][] board;
     public TicTacToeGui(){
         super("Tic Tac Toe(Java Swing)");
         setSize(CommonConstraints.FRAME_SIZE);
@@ -39,6 +40,27 @@ public class TicTacToeGui extends JFrame {
                 CommonConstraints.FRAME_SIZE.width,
                 scoreLabel.getPreferredSize().height
                 );
+
+        //game board
+        GridLayout gridLayout=new GridLayout(3,3);
+        JPanel boardPanel=new JPanel(gridLayout);
+        boardPanel.setBounds(0, scoreLabel.getY() + scoreLabel.getPreferredSize().height + 35,
+                CommonConstraints.BOARD_SIZE.width,
+                CommonConstraints.BOARD_SIZE.height
+        );
+//create board
+for (int i =0;i< board.length;i++){
+    for(int j=0;j< board[i].length;j++) {
+        JButton button=new JButton();
+        button.setFont(new Font("Dialog",Font.PLAIN,180));
+        button.setPreferredSize(CommonConstraints.BUTTON_SIZE);
+        button.setBackground(CommonConstraints.BACKGROUND_COLOR);
+        button.setBorder(BorderFactory.createLineBorder(CommonConstraints.BOARD_COLOR));
+
+        //add buttons to to board
+
+    }
+}
 
         getContentPane().add(turnLabel);
          getContentPane().add(barLabel);

@@ -134,9 +134,14 @@ public class TicTacToeGui extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        if (command.equals("Reset")) {
+        if (command.equals("Reset") || command.equals("Play Again") ) {
             //reset the game
             resetGame();
+            //only reset the score when  pressing reset
+            if (command.equals("Reset"))
+                xScore=oScore=0;
+            if (command.equals("Play Again"))
+                resultDialog.setVisible(false);
         } else {
             //player move
             JButton button = (JButton) e.getSource();
@@ -181,10 +186,89 @@ public class TicTacToeGui extends JFrame implements ActionListener {
 
 
     }
-    private void checkXWin(){
+    private void checkXWin() {
+        String result = "X wins!";
+        //check rows
+        for (int row = 0; row < board.length; row++) {
+            if (board[row][0].getText().equals("X") && board[row][1].getText().equals("X") && board[row][2].getText().equals("X")) {
+                resultLabel.setText(result);
 
+                //display result dialog
+                resultDialog.setVisible(true);
+                //update score
+                xScore++;
+            }
+        }
+        //check columns
+        for (int col = 0; col < board.length; col++) {
+            if (board[0][col].getText().equals("X") && board[1][col].getText().equals("X") && board[2][col].getText().equals("X")) {
+                resultLabel.setText(result);
+
+                //display result dialog
+                resultDialog.setVisible(true);
+                //update score
+                xScore++;
+            }
+        }
+        //check diagonals
+        if (board[0][0].getText().equals("X") && board[1][1].getText().equals("X") && board[2][2].getText().equals("X")) {
+            resultLabel.setText(result);
+
+            //display result dialog
+            resultDialog.setVisible(true);
+            //update score
+            xScore++;
+        }
+        if (board[2][0].getText().equals("X") && board[1][1].getText().equals("X") && board[0][2].getText().equals("X")){
+            resultLabel.setText(result);
+
+            //display result dialog
+            resultDialog.setVisible(true);
+            //update score
+            xScore++;
+        }
     }
     private void checkOWin(){
+        String result = "O wins!";
+        //check rows
+        for (int row = 0; row < board.length; row++) {
+            if (board[row][0].getText().equals("O") && board[row][1].getText().equals("O") && board[row][2].getText().equals("0")) {
+                resultLabel.setText(result);
+
+                //display result dialog
+                resultDialog.setVisible(true);
+                //update score
+                oScore++;
+            }
+        }
+        //check columns
+        for (int col = 0; col < board.length; col++) {
+            if (board[0][col].getText().equals("O") && board[1][col].getText().equals("O") && board[2][col].getText().equals("O")) {
+                resultLabel.setText(result);
+
+                //display result dialog
+                resultDialog.setVisible(true);
+                //update score
+                oScore++;
+            }
+        }
+        //check diagonals
+        if (board[0][0].getText().equals("O") && board[1][1].getText().equals("O") && board[2][2].getText().equals("O")) {
+            resultLabel.setText(result);
+
+            //display result dialog
+            resultDialog.setVisible(true);
+            //update score
+            oScore++;
+        }
+        if (board[2][0].getText().equals("O") && board[1][1].getText().equals("O") && board[0][2].getText().equals("O")){
+            resultLabel.setText(result);
+
+            //display result dialog
+            resultDialog.setVisible(true);
+            //update score
+            oScore++;
+        }
 
     }
     private void resetGame() {

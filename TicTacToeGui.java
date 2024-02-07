@@ -179,6 +179,10 @@ public class TicTacToeGui extends JFrame implements ActionListener {
                     //check to see if the las winning move was from X
                   checkOWin();
                 }
+                //check win conditions
+                checkDraw();
+                //update score label
+                scoreLabel.setText("x: "+ xScore +" | 0" + oScore);
             }
             repaint();
             revalidate();
@@ -271,6 +275,13 @@ public class TicTacToeGui extends JFrame implements ActionListener {
         }
 
     }
+    private void checkDraw(){
+       if (moveCounter>=9){
+           resultLabel.setText("Draw!");
+           resultDialog.setVisible(true);
+       }
+
+    }
     private void resetGame() {
         //reset player back to x_player
         isPlayerOne = true;
@@ -278,7 +289,8 @@ public class TicTacToeGui extends JFrame implements ActionListener {
         turnLabel.setBackground(CommonConstraints.x_COLOR);
         //reset score
         scoreLabel.setText(CommonConstraints.SCORE_LABEL);
-
+ //reset move counter
+        moveCounter=0;
         //reset board
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {

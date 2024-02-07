@@ -2,14 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class TicTacToeGui extends JFrame implements ActionListener {
     private int xScore, oScore, moveCounter;
 
     //isPlayerOne - flag to indicate if the current player is player x or not
     private boolean isPlayerOne;
-    private JLabel turnLabel, scoreLabel;
+    private JLabel turnLabel, scoreLabel,resultLabel;
     private JButton[][] board;
+    private JDialog resultDialog;
+
 
     public TicTacToeGui() {
         super("Tic Tac Toe(Java Swing)");
@@ -20,6 +24,7 @@ public class TicTacToeGui extends JFrame implements ActionListener {
         setLayout(null);
         getContentPane().setBackground(CommonConstraints.BACKGROUND_COLOR);
         //init vars
+        createResultDialog();
         board = new JButton[3][3];
         //player x starts first
         isPlayerOne = true;
@@ -97,6 +102,34 @@ public class TicTacToeGui extends JFrame implements ActionListener {
         getContentPane().add(boardPanel);
         getContentPane().add(resetButton);
     }
+    private void createResultDialog(){
+        resultDialog=new JDialog();
+        resultDialog.getContentPane().setBackground(CommonConstraints.BACKGROUND_COLOR);
+        resultDialog.setResizable(false);
+        resultDialog.setTitle("Result");
+        resultDialog.setSize(CommonConstraints.RESULT_DIALOG_SIZE);
+        resultDialog.setLocationRelativeTo(null);
+        resultDialog.setModal(true);
+        resultDialog.setLayout(new GridLayout(2,1));
+        resultDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+               resetGame();
+            }
+        });
+      //result label
+        resultLabel=new JLabel();
+        resultLabel.setFont(new Font("Dialog",Font.BOLD,18));
+        resultLabel.setForeground(CommonConstraints.BOARD_COLOR);
+        resultLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        //restart button
+        JButton restartButton=new JButton("Play Again");
+        restartButton.setBackground(CommonConstraints.BOARD_COLOR);
+        restartButton.addActionListener(this);
+
+        resultDialog.add(resultLabel);
+        resultDialog.add(restartButton);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -133,6 +166,14 @@ public class TicTacToeGui extends JFrame implements ActionListener {
                     isPlayerOne = true;
 
                 }
+                //check the win conditions
+                if (isPlayerOne){
+                    //check to see whether the last move from 0 was the winning move
+                    checkXWin();
+                }{
+                    //check to see if the las winning move was from X
+                  checkOWin();
+                }
             }
             repaint();
             revalidate();
@@ -140,7 +181,12 @@ public class TicTacToeGui extends JFrame implements ActionListener {
 
 
     }
+    private void checkXWin(){
 
+    }
+    private void checkOWin(){
+
+    }
     private void resetGame() {
         //reset player back to x_player
         isPlayerOne = true;

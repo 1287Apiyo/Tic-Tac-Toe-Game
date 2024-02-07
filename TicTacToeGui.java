@@ -1,7 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TicTacToeGui extends JFrame {
+public class TicTacToeGui extends JFrame implements ActionListener {
+    private int xScore,oScore,moveCounter;
+
+    //isPlayerOne - flag to indicate if the current player is player x or not
+    private boolean isPlayerOne;
     private JLabel turnLabel,scoreLabel;
     private  JButton[][] board;
     public TicTacToeGui(){
@@ -57,6 +63,7 @@ for (int i =0;i< board.length;i++){
         button.setFont(new Font("Dialog",Font.PLAIN,180));
         button.setPreferredSize(CommonConstraints.BUTTON_SIZE);
         button.setBackground(CommonConstraints.BACKGROUND_COLOR);
+        button.addActionListener(this);
         button.setBorder(BorderFactory.createLineBorder(CommonConstraints.BOARD_COLOR));
 
         //add buttons to  board
@@ -70,6 +77,7 @@ for (int i =0;i< board.length;i++){
        //reset button
         JButton resetButton=new JButton("Reset");
         resetButton.setFont(new Font("Dialog",Font.PLAIN,24));
+        resetButton.addActionListener(this);
         resetButton.setBackground(CommonConstraints.BOARD_COLOR);
         resetButton.setBounds(
                 (CommonConstraints.FRAME_SIZE.width - resetButton.getPreferredSize().width)/2,
@@ -84,5 +92,36 @@ for (int i =0;i< board.length;i++){
          getContentPane().add(scoreLabel);
          getContentPane().add(boardPanel);
          getContentPane().add(resetButton);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command =e.getActionCommand();
+        if (command.equals("Reset")){
+            //reset the game
+            resetGame();
+        }else {
+            //player move
+            JButton button=(JButton)e.getSource();
+            if (button.getText().equals(" ")){
+
+            }
+        }
+
+
+    }
+    private void resetGame(){
+        //reset player back to x_player
+        isPlayerOne=true;
+        turnLabel.setText(CommonConstraints.X_LABEL);
+        turnLabel.setBackground(CommonConstraints.x_COLOR);
+        //reset score
+        scoreLabel.setText(CommonConstraints.SCORE_LABEL);
+
+        //reset board
+        for (int i =0;i< board.length;i++){
+            for(int j=0;j< board[i].length;j++){
+                board[i][j].setText(" ");
+            }
     }
 }
